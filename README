@@ -1,0 +1,10 @@
+nr_easy_workspace
+=================
+
+Provides a new workspace management frontend
+that is easier to use than the original one
+- it is based on pages, not single content elements.
+
+It also features easy review email composition,
+selectable reviewer and review message templates.
+
