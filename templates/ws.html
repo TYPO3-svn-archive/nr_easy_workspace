@@ -1,0 +1,88 @@
+<!-- ###FULLDOC### begin -->
+<div class="typo3-fullDoc">
+	<!-- Page header with buttons, path details and csh -->
+	<div id="typo3-docheader">
+		<div id="typo3-docheader-row1">
+			<div class="buttonsleft">###BUTTONLIST_LEFT###</div>
+			<div class="buttonsright">###BUTTONLIST_RIGHT###</div>
+		</div>
+		<div id="typo3-docheader-row2">
+			<div class="docheader-row2-left"></div>
+			<div class="docheader-row2-right"></div>
+		</div>
+	</div>
+	<!-- Content of module, for instance listing, info or editing -->
+	<div id="typo3-docbody">
+		<div id="typo3-inner-docbody">
+			###CONTENT###
+		</div>
+	</div>
+</div>
+<!-- ###FULLDOC### end -->
+
+<!-- Grouping the icons on top -->
+
+<!-- ###BUTTON_GROUP_WRAP### -->
+	<div class="buttongroup">###BUTTONS###</div>
+<!-- ###BUTTON_GROUP_WRAP### -->
+
+<!-- ###BUTTON_GROUPS_LEFT### -->
+<!-- ###BUTTON_GROUP1### -->###NEW_RECORD###<!-- ###BUTTON_GROUP1### -->
+<!-- ###BUTTON_GROUPS_LEFT### -->
+
+<!-- ###BUTTON_GROUPS_RIGHT### -->
+<!-- ###BUTTON_GROUP1### --><!-- ###BUTTON_GROUP1### -->
+<!-- ###BUTTON_GROUPS_RIGHT### -->
+
+<!-- ###WORKSPACE_OVERVIEW_TABLE### -->
+<table border="0" cellpadding="0" cellspacing="1" class="lrPadding workspace-overview">
+<tr class="bgColor5 tableheader">
+    <td>&nbsp;</td>
+    <td nowrap="nowrap" width="100%">###LLL_LABEL_PAGETREE###</td>
+    <td nowrap="nowrap">###LLL_LABEL_ACTION###</td>
+</tr>
+###WORKSPACE_OVERVIEW_CONTENT###
+</table>
+<!-- ###WORKSPACE_OVERVIEW_TABLE### -->
+
+<!-- ###WORKSPACE_REVIEWER_TABLE### -->
+<table border="0" cellpadding="0" cellspacing="1" class="lrPadding workspace-overview">
+    <tr>
+        <td width="100%"><img src="clear.gif" width="1" height="5" alt="" /></td>
+    </tr>
+    <tr class="bgColor5 tableheader">
+        <td nowrap="nowrap"><b>###LLL_INFORM_REVIEWER###</b></td>
+    </tr>
+    <!-- ###WORKSPACE_REVIEWER_AVAILABLE### -->
+    <tr class="bgColor4-20">
+        <td nowrap="nowrap">
+            <table>
+                <tr>
+                    <td>###LLL_REVIEWER###</td>
+                    <td><select id="reviewer" name="cmd[pages][0][version][reviewer]" onchange="testSendButtons();">###OPTIONS_REVIEWER###</select></td>
+                </tr>
+                <tr>
+                    <td>###LLL_REVIEWER_MESSAGE###</td>
+                    <td><select id="message"  name="cmd[pages][0][version][msg]" onchange="updateText();testSendButtons();">###OPTIONS_MESSAGES###</select></td>
+                </tr>
+                <tr>
+                    <td>###LLL_REVIEWER_MESSAGE_IND###</td>
+                    <td><textarea id="message_ind" name="cmd[pages][0][version][msg_ind]" cols="100" rows="10" onchange="testSendButtons();" onkeyup="testSendButtons();"></textarea></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="bgColor4-20">
+        <td nowrap="nowrap">
+            <input type="submit" id="submit_marked_to_review" name="cmd[pages][0][version][review]" value="###LLL_SUBMIT_MARKED_TO_REVIEW###" disabled="disabled" style="opacity:0.3"/>
+        </td>
+    </tr>
+    <!-- ###WORKSPACE_REVIEWER_AVAILABLE### -->
+
+    <!-- ###WORKSPACE_NO_REVIEWER_AVAILABLE### -->
+    <tr class="bgColor4-20">
+        <td nowrap="nowrap">###LLL_NO_REVIEWERS###</td>
+    </tr>
+    <!-- ###WORKSPACE_NO_REVIEWER_AVAILABLE### -->
+</table>
+<!-- ###WORKSPACE_REVIEWER_TABLE### -->
