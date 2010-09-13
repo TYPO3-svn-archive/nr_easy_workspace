@@ -1,6 +1,7 @@
 2010-09-13 Alexander Opitz <alexander.opitz@netresearch.de>
-* Possibility to have up to 99 Mail messages. (4926)
-* Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self written messages (4926)
+* Possibility to have up to 99 Mail messages. (9426)
+* Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self written messages (9426)
+* Fix Domain to link of page preview in mail (9428)
 
 2010-04-22 Alexander Opitz <alexander.opitz@netresearch.de>
 * Resolve template loading problem, if typo3 directory is symlinked. (ULS-19)

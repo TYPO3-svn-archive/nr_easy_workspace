@@ -271,15 +271,38 @@ class tx_nreasyworkspace_tcemain
             );
             $arSendMails['toreplace'] .= "\n"
                 . htmlspecialchars(
-                    t3lib_div::getIndpEnv('TYPO3_SITE_URL')
-                    . TYPO3_mainDir
-                    . 'mod/user/ws/wsol_preview.php?id=' . $id
-                    . $addGetVars . $anchor
+                    $this->getPreviewUrl($id, $addGetVars, $anchor)
                 );
         }
 
         $arConfVars['sendMails'] = $arSendMails;
     }//protected function review_page(..)
+
+    /**
+     * Generates preview url with domain record for page.
+     *
+     * @param integer $id         Id of page to link
+     * @param string  $addGetVars Possible get vars to add to url.
+     * @param string  $anchor     Possible anchor to add to url.
+     *
+     * @return string Link to preview of page.
+     */
+    public function getPreviewUrl($id, $addGetVars, $anchor)
+    {
+        $rootLine = t3lib_BEfunc::BEgetRootLine($id);
+
+        $viewScriptPreviewEnabled  = '/' . TYPO3_mainDir . 'mod/user/ws/wsol_preview.php?id=';
+
+        if ($rootLine)  {
+            $parts = parse_url(t3lib_div::getIndpEnv('TYPO3_SITE_URL'));
+            if (t3lib_BEfunc::getDomainStartPage($parts['host'], $parts['path'])) {
+                $preUrl_temp = t3lib_BEfunc::firstDomainRecord($rootLine);
+            }
+        }
+        $preUrl = $preUrl_temp ? (t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://') . $preUrl_temp : $backPath . '..';
+
+        return $preUrl . $viewScriptPreviewEnabled . $id . $addGetVars . $anchor;
+    } // public function getPreviewUrl(..)
 
     /**
     * Changes the stage version (t3ver_stage) of elements in database.
