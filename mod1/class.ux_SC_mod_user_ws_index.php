@@ -420,7 +420,6 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
                     'YourTypo3@installation.org'
                 )
             );
-var_dump(trim($message));die();
             t3lib_div::plainMailEncoded(
                 implode(',',$emails),
                 $arSendMails['title'],
