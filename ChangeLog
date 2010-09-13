@@ -1,7 +1,8 @@
-2010-05-07 Alexander Opitz <alexander.opitz@netresearch.de>
-* Release 0.5.0 (NRFE-50)
+2010-09-13 Alexander Opitz <alexander.opitz@netresearch.de>
+* Possibility to have up to 99 Mail messages. (4926)
+* Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self written messages (4926)
 
-2010-04-23 Alexander Opitz <alexander.opitz@netresearch.de>
+2010-04-22 Alexander Opitz <alexander.opitz@netresearch.de>
 * Resolve template loading problem, if typo3 directory is symlinked. (ULS-19)
 * Release as 0.4.99. (ULS-19)
 

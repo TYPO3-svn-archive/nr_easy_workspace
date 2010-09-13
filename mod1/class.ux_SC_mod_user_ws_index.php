@@ -66,7 +66,15 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
         parent::init();
 
         $filename = 'EXT:nr_easy_workspace/templates/ws.html';
-        
+
+        $strLLFile = 'fileadmin/workspaceMessages/locallang.xml';
+
+        if (is_file(PATH_site . $strLLFile)) {
+            $this->messageLL = $LANG->includeLLFile($strLLFile, 0);
+        } else {
+            $this->messageLL = $GLOBALS['LOCAL_LANG'];
+        }
+
         // If you symlink your typo3, then php resolves this symlinks
         // and so you can't change from typo3 to typo3conf via ../ path changes.
         $strBackPathSave = $this->doc->backPath;
@@ -76,15 +84,17 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
         $this->doc->setModuleTemplate($filename);
         $this->doc->backPath = $strBackPathSave;
 
+        $arText = array();
+        for ($i = 0; $i < 100; $i++) {
+            $text = $LANG->getLLL('mailtext_' . $i, $this->messageLL);
+            if (empty($text)) {
+                break;
+            }
+            $arText[] = sprintf($text, $TYPO3_CONF_VARS['SYS']['sitename']);
+        }
+
         $this->doc->JScode.= $this->doc->wrapScriptTags(
-            'arTexte = new Array("'
-            . sprintf($LANG->getLL('mailtext_1'), $TYPO3_CONF_VARS['SYS']['sitename'])
-            . '","'
-            . sprintf($LANG->getLL('mailtext_2'), $TYPO3_CONF_VARS['SYS']['sitename'])
-            . '","'
-            . sprintf($LANG->getLL('mailtext_3'), $TYPO3_CONF_VARS['SYS']['sitename'])
-            . '"
-                            );
+            'arTexte = ' . json_encode($arText) . ';
             function testSendButtons() {
                 arElements = document.getElementsByTagName("input");
                 bSomething = false;
@@ -311,11 +321,14 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
     {
         global $LANG, $BE_USER;
         // @NETRESEARCH Die Mitteilungsbox an die Reviewer
-        $arMessages = array(
-            $LANG->getLL('mailtext_1_header'),
-            $LANG->getLL('mailtext_2_header'),
-            $LANG->getLL('mailtext_3_header')
-        );
+        $arMessages = array();
+        for ($i = 0; $i < 100; $i++) {
+            $text = $LANG->getLLL('mailtext_' . $i, $this->messageLL);
+            if (empty($text)) {
+                break;
+            }
+            $arMessages[] = $LANG->getLLL('mailtext_' . $i . '_header', $this->messageLL);
+        }
         $arReviewers = $this->getReviewers();
         $strRevOption = '<option value="">'
             . $LANG->getLL('select_reviewer')
