@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2009 Netresearch GmbH & Co KG <info@netresearch.de>
+*  (c) 2009, 2010 Netresearch GmbH & Co KG <info@netresearch.de>
 *  All rights reserved
 *
 *  This script is free software; you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 /**
  * Implements the Workspace Preview screens
  *
- * @author Alexander Opitz <ao@netresearch.de>
+ * @author Alexander Opitz <alexander.opitz@netresearch.de>
  * @see wslib_gui
  * @package nr_easy_workspace
  */
@@ -37,16 +37,17 @@ require_once('class.wslib.php');
 
 $LANG->includeLLFile('EXT:nr_easy_workspace/mod1/locallang.xml');
 
-class ux_wsol_preview extends wsol_preview {
-
+class ux_wsol_preview extends wsol_preview
+{
     var $workspace = 0;  // Which workspace to preview!
 
     /**
-        * Main function of class
-        *
-        * @return void
-        */
-    function main() {
+     * Main function of class
+     *
+     * @return void
+     */
+    function main()
+    {
         global $LANG, $BE_USER;
 
         if ($this->isBeLogin()) {
@@ -56,7 +57,7 @@ class ux_wsol_preview extends wsol_preview {
         // @NETRESEARCH Kompletter Umbau, single/multiview, button zur Livestellung, da rechte Seite weg gefallen ist.
         if ($header = t3lib_div::_GP('header')) {
 
-        if (t3lib_div::_GP('show')=='both') {
+            if (t3lib_div::_GP('show')=='both') {
                 $toggle='single';
             } else {
                 $toggle='both';
@@ -133,11 +134,12 @@ class ux_wsol_preview extends wsol_preview {
     }
 
     /**
-        * URLs generated in $this->URL array
-        *
-        * @return void
-        */
-    function generateUrls() {
+     * URLs generated in $this->URL array
+     *
+     * @return void
+     */
+    function generateUrls()
+    {
             // Live URL:
         $pageId = intval(t3lib_div::_GP('id'));
         $language = intval(t3lib_div::_GP('L'));
@@ -165,11 +167,12 @@ class ux_wsol_preview extends wsol_preview {
     }
 
     /**
-        * Outputting frameset HTML code
-        *
-        * @return void
-        */
-    function printFrameset() {
+     * Outputting frameset HTML code
+     *
+     * @return void
+     */
+    function printFrameset()
+    {
         // @NETRESEARCH Add singleview, rechten Frame entfernt => Dadurch keine Unterscheidung für Reviewer nötig
         if (t3lib_div::_GP('show')=='both') {
             return '
@@ -207,7 +210,8 @@ class ux_wsol_preview extends wsol_preview {
         *
         * @return boolean  True, if there is a logged in backend user.
         */
-    function isBeLogin() {
+    function isBeLogin()
+    {
         return is_array($GLOBALS['BE_USER']->user);
     }
 }
