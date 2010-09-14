@@ -1,3 +1,6 @@
+2010-09-14 Alexander Opitz <alexander.opitz@netresearch.de>
+* Rewrite preview to handle correct workspace. (9427)
+
 2010-09-13 Alexander Opitz <alexander.opitz@netresearch.de>
 * Possibility to have up to 99 Mail messages. (9426)
 * Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self written messages (9426)

@@ -401,7 +401,7 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
         $arSendMails
             = $TYPO3_CONF_VARS['SC_OPTIONS']['tx_nreasyworkspace_tcemain']['sendMails'];
 
-        if (isset($arSendMails['to']) && $arSendMails['to'] != '') {
+        if (isset($arSendMails['to']) && is_array($arSendMails['to'])) {
             $emails = $arSendMails['to'];
             $message = sprintf($arSendMails['message'], $arSendMails['toreplace']);
             $message .= "\n" . $LANG->getLL('message_notice');
@@ -420,7 +420,7 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
                     'YourTypo3@installation.org'
                 )
             );
-            t3lib_div::plainMailEncoded(
+            $ret = t3lib_div::plainMailEncoded(
                 implode(',',$emails),
                 $arSendMails['title'],
                 trim($message),

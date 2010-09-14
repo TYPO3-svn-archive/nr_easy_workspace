@@ -289,9 +289,12 @@ class tx_nreasyworkspace_tcemain
      */
     public function getPreviewUrl($id, $addGetVars, $anchor)
     {
+        global $BE_USER;
         $rootLine = t3lib_BEfunc::BEgetRootLine($id);
 
-        $viewScriptPreviewEnabled  = '/' . TYPO3_mainDir . 'mod/user/ws/wsol_preview.php?id=';
+        $strPreview  = '/' . TYPO3_mainDir
+            . 'mod/user/ws/wsol_preview.php?id=' . $id
+            . '&wsid= ' . $BE_USER->workspace;
 
         if ($rootLine)  {
             $parts = parse_url(t3lib_div::getIndpEnv('TYPO3_SITE_URL'));
@@ -299,9 +302,11 @@ class tx_nreasyworkspace_tcemain
                 $preUrl_temp = t3lib_BEfunc::firstDomainRecord($rootLine);
             }
         }
-        $preUrl = $preUrl_temp ? (t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://') . $preUrl_temp : $backPath . '..';
+        $preUrl = $preUrl_temp
+            ? (t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://') . $preUrl_temp
+            : t3lib_div::getIndpEnv('TYPO3_SITE_URL');
 
-        return $preUrl . $viewScriptPreviewEnabled . $id . $addGetVars . $anchor;
+        return $preUrl . $strPreview . $addGetVars . $anchor;
     } // public function getPreviewUrl(..)
 
     /**
