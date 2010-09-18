@@ -294,7 +294,7 @@ class tx_nreasyworkspace_tcemain
 
         $strPreview  = '/' . TYPO3_mainDir
             . 'mod/user/ws/wsol_preview.php?id=' . $id
-            . '&wsid= ' . $BE_USER->workspace;
+            . '&wsid=' . $BE_USER->workspace;
 
         if ($rootLine)  {
             $parts = parse_url(t3lib_div::getIndpEnv('TYPO3_SITE_URL'));
