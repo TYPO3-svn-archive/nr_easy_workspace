@@ -66,9 +66,20 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
         parent::init();
 
         $filename = 'EXT:nr_easy_workspace/templates/ws.html';
+        $strPathLL = 'EXT:nr_easy_workspace/examples';
 
-        $strLLFile = 'fileadmin/workspaceMessages/locallang.xml';
+        if (isset($TYPO3_CONF_VARS['EXT']['extConf']['nr_easy_workspace'])) {
+            $arConfig = unserialize(
+                $TYPO3_CONF_VARS['EXT']['extConf']['nr_easy_workspace']
+            );
+            if (isset($arConfig['locallangDirectory'])
+                && $arConfig['locallangDirectory'] !== ''
+            ) {
+                $strPathLL = t3lib_div::getFileAbsFileName($arConfig['locallangDirectory']);
+            }
+        }
 
+        $strLLFile = $strPathLL . '/locallang.xml';
         if (is_file(PATH_site . $strLLFile)) {
             $this->messageLL = $LANG->includeLLFile($strLLFile, 0);
         } else {

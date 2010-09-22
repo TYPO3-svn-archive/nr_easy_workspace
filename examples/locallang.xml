@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Mail message parts for NR Easy Workspace extension</description>
+        <type>module</type>
+        <csh_table></csh_table>
+        <fileId>EXT:nr_easy_workspace/examples/locallang.xml</fileId>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="mailtext_0">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte geben Sie die folgenden Seiten frei:</label>
+            <label index="mailtext_1">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte Überarbeiten Sie die folgenden Seiten und geben Sie sie dann frei:</label>
+            <label index="mailtext_2">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte geben Sie die folgenden Seiten frei oder nehmen Sie Kontakt mit mir auf. Bitte nehmen Sie keine Änderungen an den Seiten vor:</label>
+            <label index="mailtext_0_header">Bitte Seiten freigeben.</label>
+            <label index="mailtext_1_header">Bitte Seiten überarbeiten und freigeben.</label>
+            <label index="mailtext_2_header">Bitte Seiten freigeben oder Kontakt aufnehmen, nicht überarbeiten.</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="mailtext_0">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte geben Sie die folgenden Seiten frei:</label>
+            <label index="mailtext_1">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte Überarbeiten Sie die folgenden Seiten und geben Sie sie dann frei:</label>
+            <label index="mailtext_2">Hallo,\n\nin Ihrem Verantwortungsbereich der Webseite "%s" wurden Seiten bearbeitet.\nBitte geben Sie die folgenden Seiten frei oder nehmen Sie Kontakt mit mir auf. Bitte nehmen Sie keine Änderungen an den Seiten vor:</label>
+            <label index="mailtext_0_header">Bitte Seiten freigeben.</label>
+            <label index="mailtext_1_header">Bitte Seiten überarbeiten und freigeben.</label>
+            <label index="mailtext_2_header">Bitte Seiten freigeben oder Kontakt aufnehmen, nicht überarbeiten.</label>
+        </languageKey>
+    </data>
+</T3locallang>

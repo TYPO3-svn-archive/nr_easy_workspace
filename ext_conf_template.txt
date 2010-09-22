@@ -1,0 +1,2 @@
+  # cat=basic; type=string; label=Directory where you find the locallang.xml for own messages.
+locallangDirectory = EXT:nr_easy_workspace/examples
