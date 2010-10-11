@@ -270,9 +270,7 @@ class tx_nreasyworkspace_tcemain
                 : 'TYPO3 Workspace Note: Please review pages'
             );
             $arSendMails['toreplace'] .= "\n"
-                . htmlspecialchars(
-                    $this->getPreviewUrl($id, $addGetVars, $anchor)
-                );
+                . $this->getPreviewUrl($id, $addGetVars, $anchor);
         }
 
         $arConfVars['sendMails'] = $arSendMails;
