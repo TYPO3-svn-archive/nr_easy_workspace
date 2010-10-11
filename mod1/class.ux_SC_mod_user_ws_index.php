@@ -80,6 +80,8 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
         }
 
         $strLLFile = t3lib_div::getFileAbsFileName($strPathLL) . '/locallang.xml';
+        var_dump($arConfig['locallangDirectory']);
+        var_dump($strLLFile);
         if (is_file($strLLFile)) {
             $this->messageLL = $LANG->includeLLFile($strLLFile, 0);
         } else {
