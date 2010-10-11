@@ -75,12 +75,12 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
             if (isset($arConfig['locallangDirectory'])
                 && $arConfig['locallangDirectory'] !== ''
             ) {
-                $strPathLL = t3lib_div::getFileAbsFileName($arConfig['locallangDirectory']);
+                $strPathLL = $arConfig['locallangDirectory'];
             }
         }
 
-        $strLLFile = $strPathLL . '/locallang.xml';
-        if (is_file(PATH_site . $strLLFile)) {
+        $strLLFile = t3lib_div::getFileAbsFileName($strPathLL) . '/locallang.xml';
+        if (is_file($strLLFile)) {
             $this->messageLL = $LANG->includeLLFile($strLLFile, 0);
         } else {
             $this->messageLL = $GLOBALS['LOCAL_LANG'];
