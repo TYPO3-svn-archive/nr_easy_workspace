@@ -530,24 +530,34 @@ class ux_wslib_gui extends wslib_gui
                     . ' alt="" align="top" title="" />';
             }
         }
-
         if ($rec_off) {
-            $tempUid = $rec_on['uid'];
-            $actionLinks.=
-                '<a href="#" onclick="' . htmlspecialchars(
-                    t3lib_BEfunc::viewOnClick(
-                        $tempUid,
-                        $this->doc->backPath,
-                        t3lib_BEfunc::BEgetRootLine($tempUid)
+            $addGetVars = '';
+            if ('pages_language_overlay' === $table) {
+                $tempUid = $rec_on['pid'];
+                $addGetVars .= '&L=' . $rec_off['sys_language_uid'];
+            } elseif ('pages' === $table) {
+                $tempUid = $rec_on['uid'];
+            }
+            if ($tempUid > 0) {
+                $actionLinks.=
+                    '<a href="#" onclick="' . htmlspecialchars(
+                        t3lib_BEfunc::viewOnClick(
+                            $tempUid,
+                            $this->doc->backPath,
+                            t3lib_BEfunc::BEgetRootLine($tempUid),
+                            '',
+                            '',
+                            $addGetVars
+                        )
                     )
-                )
-                . '">'
-                . '<img' . t3lib_iconWorks::skinImg(
-                    $this->doc->backPath,
-                    'gfx/zoom.gif',
-                    'width="12" height="12"')
-                . ' title="" alt="" />'
-                . '</a>';
+                    . '">'
+                    . '<img' . t3lib_iconWorks::skinImg(
+                        $this->doc->backPath,
+                        'gfx/zoom.gif',
+                        'width="12" height="12"')
+                    . ' title="" alt="" />'
+                    . '</a>';
+            }
         }
         return $actionLinks;
     }
