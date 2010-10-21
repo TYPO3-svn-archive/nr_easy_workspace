@@ -163,16 +163,27 @@ class tx_nreasyworkspace_tcemain
     protected function review_page(
         $table, $id, $strCmd, &$reference, $recursive = false
     ) {
-        global $BE_USER, $TYPO3_CONF_VARS;
+        global $BE_USER, $TYPO3_CONF_VARS, $LANG;
 
-        $arMessages = array(
-            'Bitte Seiten freigeben.',
-            'Bitte Seiten überarbeiten und freigeben',
-            'Bitte Seiten freigeben oder Kontakt aufnehmen, nicht überarbeiten',
-            'Please publish pages',
-            'Please revise and publish pages',
-            'Please publish pages or contact me, do not revise'
-        );
+        $strPathLL = 'EXT:nr_easy_workspace/examples';
+
+        if (isset($TYPO3_CONF_VARS['EXT']['extConf']['nr_easy_workspace'])) {
+            $arConfig = unserialize(
+                $TYPO3_CONF_VARS['EXT']['extConf']['nr_easy_workspace']
+            );
+            if (isset($arConfig['locallangDirectory'])
+                && $arConfig['locallangDirectory'] !== ''
+            ) {
+                $strPathLL = $arConfig['locallangDirectory'];
+            }
+        }
+
+        $strLLFile = t3lib_div::getFileAbsFileName($strPathLL) . '/locallang.xml';
+        if (is_file($strLLFile)) {
+            $this->messageLL = $LANG->includeLLFile($strLLFile, 0);
+        } else {
+            $this->messageLL = $GLOBALS['LOCAL_LANG'];
+        }
 
         //kick out people without edit access
         if (!$reference->checkRecordUpdateAccess($table, $id)) {
@@ -259,20 +270,25 @@ class tx_nreasyworkspace_tcemain
                 ',
                 ($strCmd['pages'][0]['version']['msg_ind'] != ''
                     ? $strCmd['pages'][0]['version']['msg_ind']
-                    : $arMessages[$strCmd['pages'][0]['version']['msg']]
+                    : $LANG->getLLL(
+                        'mailtext_' . $strCmd['pages'][0]['version']['msg'],
+                        $this->messageLL
+                    )
                 ),
                 "%s" // Späteres ersetzen durch alle zu reviewenden Seiten
             );
             $arSendMails['to']      = $emails;
             $arSendMails['message'] = $message;
             $arSendMails['title']   = ($strCmd['pages'][0]['version']['msg'] != ''
-                ? $arMessages[$strCmd['pages'][0]['version']['msg']]
+                ? $LANG->getLLL(
+                        'mailtext_' . $strCmd['pages'][0]['version']['msg'] . '_header',
+                        $this->messageLL
+                    )
                 : 'TYPO3 Workspace Note: Please review pages'
             );
             $arSendMails['toreplace'] .= "\n"
                 . $this->getPreviewUrl($id, $addGetVars, $anchor);
         }
-
         $arConfVars['sendMails'] = $arSendMails;
     }//protected function review_page(..)
 
