@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "nr_easy_workspace".
 #
-# Auto generated 13-09-2010 08:25
+# Auto generated 25-10-2010 22:46
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'An easy workspace administration tool for editors and reviewers.',
 	'category' => 'be',
 	'shy' => 0,
-	'version' => '0.5.0',
+	'version' => '0.5.1',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
@@ -41,7 +41,9 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:12:{s:9:"ChangeLog";s:4:"43cb";s:6:"README";s:4:"ad0f";s:36:"class.tx_nreasyworkspace_tcemain.php";s:4:"6cf2";s:12:"ext_icon.gif";s:4:"a459";s:17:"ext_localconf.php";s:4:"f76b";s:14:"doc/manual.pdf";s:4:"19c8";s:14:"doc/manual.sxw";s:4:"32c5";s:38:"mod1/class.ux_SC_mod_user_ws_index.php";s:4:"500a";s:27:"mod1/class.ux_wslib_gui.php";s:4:"e473";s:30:"mod1/class.ux_wsol_preview.php";s:4:"9195";s:18:"mod1/locallang.xml";s:4:"fa25";s:17:"templates/ws.html";s:4:"11ad";}',
+	'_md5_values_when_last_written' => 'a:14:{s:9:"ChangeLog";s:4:"4d02";s:6:"README";s:4:"ad0f";s:36:"class.tx_nreasyworkspace_tcemain.php";s:4:"8795";s:21:"ext_conf_template.txt";s:4:"f015";s:12:"ext_icon.gif";s:4:"a459";s:17:"ext_localconf.php";s:4:"f76b";s:14:"doc/manual.pdf";s:4:"5bbc";s:14:"doc/manual.sxw";s:4:"c3dc";s:22:"examples/locallang.xml";s:4:"20d1";s:38:"mod1/class.ux_SC_mod_user_ws_index.php";s:4:"4c62";s:27:"mod1/class.ux_wslib_gui.php";s:4:"acf3";s:30:"mod1/class.ux_wsol_preview.php";s:4:"0b61";s:18:"mod1/locallang.xml";s:4:"e130";s:17:"templates/ws.html";s:4:"11ad";}',
+	'suggests' => array(
+	),
 );
 
 ?>
