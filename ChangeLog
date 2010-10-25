@@ -1,10 +1,28 @@
+2010-10-25 Alexander Opitz <alexander.opitz@netresearch.de>
+* Version 0.5.1
+* Thanks for donations goes to
+  - Delft University of Technology (Netherlands) http://tudelft.nl/ (9426, 9427,
+    9428)
+  - Universität Leipzig (Germany) http://uni-leipzig.de (ULS-65)
+
+2010-10-21 Christian Weiske <christian.weiske@netresearch.de>
+* Update documentation (NRFE-120)
+
+2010-10-11 Alexander Opitz <alexander.opitz@netresearch.de>
+* Don't show preview button on elements which are no page and no page_overlay,
+  fix link for page_overlay (ULS-65)
+
 2010-09-14 Alexander Opitz <alexander.opitz@netresearch.de>
 * Rewrite preview to handle correct workspace. (9427)
 
 2010-09-13 Alexander Opitz <alexander.opitz@netresearch.de>
 * Possibility to have up to 99 Mail messages. (9426)
-* Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self written messages (9426)
+* Add /fileadmin/workspaceMessages/locallang.xml as a possible way to add self
+  written messages (9426)
 * Fix Domain to link of page preview in mail (9428)
+
+2010-05-07 Alexander Opitz <alexander.opitz@netresearch.de>
+* Version 0.5.0
 
 2010-04-22 Alexander Opitz <alexander.opitz@netresearch.de>
 * Resolve template loading problem, if typo3 directory is symlinked. (ULS-19)
