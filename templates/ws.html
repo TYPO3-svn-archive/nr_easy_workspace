@@ -59,15 +59,25 @@
             <table>
                 <tr>
                     <td>###LLL_REVIEWER###</td>
-                    <td><select id="reviewer" name="cmd[pages][0][version][reviewer]" onchange="testSendButtons();">###OPTIONS_REVIEWER###</select></td>
+                    <td>
+                        <select id="reviewer" name="cmd[pages][0][version][reviewer]" onchange="testSendButtons();">
+                            ###OPTIONS_REVIEWER###
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>###LLL_REVIEWER_MESSAGE###</td>
-                    <td><select id="message"  name="cmd[pages][0][version][msg]" onchange="updateText();testSendButtons();">###OPTIONS_MESSAGES###</select></td>
+                    <td>
+                        <select id="message" name="cmd[pages][0][version][msg]" onchange="updateText();testSendButtons();">
+                            ###OPTIONS_MESSAGES###
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>###LLL_REVIEWER_MESSAGE_IND###</td>
-                    <td><textarea id="message_ind" name="cmd[pages][0][version][msg_ind]" cols="100" rows="10" onchange="testSendButtons();" onkeyup="testSendButtons();"></textarea></td>
+                    <td>
+                        <textarea id="message_ind" name="cmd[pages][0][version][msg_ind]" cols="100" rows="10" onchange="testSendButtons();" onkeyup="testSendButtons();"></textarea>
+                    </td>
                 </tr>
             </table>
         </td>

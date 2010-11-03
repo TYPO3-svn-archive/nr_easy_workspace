@@ -224,7 +224,7 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
                     $content, 1, 1
                 );
             }
-            $this->content.=$this->doc->section('', $content, 0, 1);
+            $this->content .= $this->doc->section('', $content, 0, 1);
         }
             // Setting up the buttons and markers for docheader
         $docHeaderButtons = $this->getButtons();
@@ -330,28 +330,34 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
      */
     function getReviewersOverviewEasy()
     {
-        global $LANG, $BE_USER;
-        // @NETRESEARCH Die Mitteilungsbox an die Reviewer
-        $arMessages = array();
-        for ($i = 0; $i < 100; $i++) {
-            $text = $LANG->getLLL('mailtext_' . $i, $this->messageLL);
-            if (empty($text)) {
-                break;
-            }
-            $arMessages[] = $LANG->getLLL('mailtext_' . $i . '_header', $this->messageLL);
-        }
         $arReviewers = $this->getReviewers();
-        $strRevOption = '<option value="">'
-            . $LANG->getLL('select_reviewer')
-            . '</option>';
-        $strMsgOption = '<option value="">'
-            . $LANG->getLL('select_message')
-            . '</option>';
 
-        $strTable = t3lib_parsehtml::getSubpart(
-            $this->doc->moduleTemplate,
-            '###WORKSPACE_REVIEWER_TABLE###'
-        );
+        if (count($arReviewers)) {
+            $arMessages = $this->getMailMessages();
+            return $this->getReviewersOverviewReviewers(
+                $arReviewers, $arMessages
+            );
+        } else {
+            return t3lib_parsehtml::substituteSubpart(
+                $strTable,
+                '###WORKSPACE_REVIEWER_AVAILABLE###',
+                ''
+            );
+        }
+    }
+
+
+    /**
+     * Builds the reviewer part for available reviewers
+     *
+     * @param array $arReviewers Array of reviewers
+     * @param array $arMessages  Array of Message headers to select from.
+     *
+     * @return string HTML generated from template
+     */
+    function getReviewersOverviewReviewers(array $arReviewers, array $arMessages)
+    {
+        global $LANG;
 
         $arLLL = array(
             '###LLL_INFORM_REVIEWER###'      => $LANG->getLL('inform_reviewer'),
@@ -363,42 +369,87 @@ class ux_SC_mod_user_ws_index extends SC_mod_user_ws_index
             '###LLL_NO_REVIEWERS###'         => $LANG->getLL('no_reviewers'),
         );
 
-        $strTable = t3lib_parsehtml::substituteMarkerArray(
-            $strTable,
+        $strRevOption = $this->getSelectOptions(
+            $LANG->getLL('select_reviewer'),
+            $arReviewers
+        );
+        $strMsgOption = $this->getSelectOptions(
+            $LANG->getLL('select_message'),
+            $arMessages
+        );
+
+        $arData = array(
+            '###OPTIONS_REVIEWER###' => $strRevOption,
+            '###OPTIONS_MESSAGES###' => $strMsgOption,
+        );
+
+
+        $strContent = t3lib_parsehtml::getSubpart(
+            $this->doc->moduleTemplate,
+            '###WORKSPACE_REVIEWER_TABLE###'
+        );
+
+        $strContent = t3lib_parsehtml::substituteMarkerArray(
+            $strContent,
             $arLLL
         );
 
-        if (count($arReviewers)) {
-            foreach ($arReviewers as $uid => $name) {
-                $strRevOption.= '<option value="'.$uid.'">'.$name.'</option>';
-            }
-            foreach ($arMessages as $uid => $name) {
-                $strMsgOption.= '<option value="'.$uid.'">'.$name.'</option>';
-            }
-            $arData = array(
-                '###OPTIONS_REVIEWER###' => $strRevOption,
-                '###OPTIONS_MESSAGES###' => $strMsgOption,
-            );
+        $strContent = t3lib_parsehtml::substituteMarkerArray(
+            $strContent,
+            $arData
+        );
 
-            $strTable = t3lib_parsehtml::substituteMarkerArray(
-                $strTable,
-                $arData
-            );
+        $strContent = t3lib_parsehtml::substituteSubpart(
+            $strContent,
+            '###WORKSPACE_NO_REVIEWER_AVAILABLE###',
+            ''
+        );
 
-            $strTable = t3lib_parsehtml::substituteSubpart(
-                $strTable,
-                '###WORKSPACE_NO_REVIEWER_AVAILABLE###',
-                ''
-            );
-        } else {
-            $strTable = t3lib_parsehtml::substituteSubpart(
-                $strTable,
-                '###WORKSPACE_REVIEWER_AVAILABLE###',
-                ''
-            );
+        return $strContent;
+    }
+
+    /**
+     * Returns HTML Select Options for given elements
+     *
+     * @param string $strFirst First Element with empty value
+     * @param array  $arData   Option elements with value => name pairs
+     *
+     * @return string HTML of the options.
+     */
+    private function getSelectOptions($strFirst, $arData)
+    {
+        $strOption = '<option value="">'
+            . $strFirst
+            . '</option>';
+
+        foreach ($arData as $value => $name) {
+            $strOption .= '<option value="'.$value.'">'.$name.'</option>';
+        }
+        
+        return $strOption;
+    }
+
+    /**
+     * Returns an array of available messages.
+     *
+     * @return array Array available of messages for mail.
+     */
+    private function getMailMessages()
+    {
+        global $LANG;
+
+        $arMessages = array();
+
+        for ($i = 0; $i < 100; $i++) {
+            $text = $LANG->getLLL('mailtext_' . $i, $this->messageLL);
+            if (empty($text)) {
+                break;
+            }
+            $arMessages[]
+                = $LANG->getLLL('mailtext_' . $i . '_header', $this->messageLL);
         }
 
-        return $strTable;
+        return $arMessages;
     }
 
     /**
