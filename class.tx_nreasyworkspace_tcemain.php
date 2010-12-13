@@ -231,15 +231,23 @@ class tx_nreasyworkspace_tcemain
             $this->setT3verTo(10, $table, $id);
         }
 
-        // Set the elements inside the page to review
-        $arInPage = $this->selectVersionsInWorkspace(
-            $wsid, $filter = 0, $stage = -99, $id
-        );
-
-        foreach ($arInPage as $table => $arElements) {
-            foreach ($arElements as $arElement) {
-                $this->setT3verTo(10, $table, $arElement['uid']);
+        switch ($table) {
+        case 'pages':
+            $pageId = $id;
+            // Set the elements inside the page to review
+            $arInPage = $this->selectVersionsInWorkspace(
+                $wsid, 0, -99, $pageId
+            );
+            foreach ($arInPage as $table => $arElements) {
+                foreach ($arElements as $arElement) {
+                    $this->setT3verTo(10, $table, $arElement['uid']);
+                }
             }
+            break;
+        case 'pages_language_overlay':
+            $pageId = $curVersion['pid'];
+            $arGetVars['L'] = $curVersion['sys_language_uid'];
+            break;
         }
 
         // Set change into logfile
@@ -262,12 +270,7 @@ class tx_nreasyworkspace_tcemain
             // Send email:
         if (count($emails)) {
             $message = sprintf(
-                '
-%s
-
-%s
-
-                ',
+                "%s\n\n%s",
                 ($strCmd['pages'][0]['version']['msg_ind'] != ''
                     ? $strCmd['pages'][0]['version']['msg_ind']
                     : $LANG->getLLL(
@@ -287,7 +290,7 @@ class tx_nreasyworkspace_tcemain
                 : 'TYPO3 Workspace Note: Please review pages'
             );
             $arSendMails['toreplace'] .= "\n"
-                . $this->getPreviewUrl($id, $addGetVars, $anchor);
+                . $this->getPreviewUrl($pageId, $arGetVars, $anchor);
         }
         $arConfVars['sendMails'] = $arSendMails;
     }//protected function review_page(..)
@@ -296,17 +299,17 @@ class tx_nreasyworkspace_tcemain
      * Generates preview url with domain record for page.
      *
      * @param integer $id         Id of page to link
-     * @param string  $addGetVars Possible get vars to add to url.
+     * @param array   $arGetVars  Possible get vars to add to url.
      * @param string  $anchor     Possible anchor to add to url.
      *
      * @return string Link to preview of page.
      */
-    public function getPreviewUrl($id, $addGetVars, $anchor)
+    public function getPreviewUrl($id, array $arGetVars = null, $anchor = '')
     {
         global $BE_USER;
         $rootLine = t3lib_BEfunc::BEgetRootLine($id);
 
-        $strPreview  = '/' . TYPO3_mainDir
+        $strPreview  = TYPO3_mainDir
             . 'mod/user/ws/wsol_preview.php?id=' . $id
             . '&wsid=' . $BE_USER->workspace;
 
@@ -317,10 +320,15 @@ class tx_nreasyworkspace_tcemain
             }
         }
         $preUrl = $preUrl_temp
-            ? (t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://') . $preUrl_temp
+            ? (t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://')
+            . $preUrl_temp . '/'
             : t3lib_div::getIndpEnv('TYPO3_SITE_URL');
 
-        return $preUrl . $strPreview . $addGetVars . $anchor;
+        $strGetVars = is_array($arGetVars)
+            ? '&' .http_build_query($arGetVars)
+            : '';
+
+        return $preUrl . $strPreview . $strGetVars . $anchor;
     } // public function getPreviewUrl(..)
 
     /**
