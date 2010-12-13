@@ -357,8 +357,9 @@ class ux_wslib_gui extends wslib_gui
 
         $arIconRecord = ($bIsOffline ? $rec_off : $rec_on);
         // Compile table row:
+        $this->line += 1;
         $strRow = '
-            <tr class="bgColor4-20 hover"'
+            <tr class="' .  ($this->line % 2 ? 'bgColor4' : 'bgColor4-20') . '"'
             . (
                 $lightcolor != ''
                 ? 'style="background-color:' . $lightcolor . '"'
