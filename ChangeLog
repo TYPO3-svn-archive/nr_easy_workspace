@@ -1,3 +1,6 @@
+2010-12-20 Alexander Opitz <alexander.opitz@netresearch.de>
+* Version 0.5.2
+
 2010-12-13 Alexander Opitz <alexander.opitz@netresearch.de>
 * Fix preview link inside mails (partly respect language). (11022)
 * Alternating rows in list view. (11023)
