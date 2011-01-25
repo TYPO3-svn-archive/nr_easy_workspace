@@ -226,9 +226,9 @@ class tx_nreasyworkspace_tcemain
         // Set stage of record:
 
         if (is_array($offVersion)) {
-            $this->setT3verTo(10, $table, $offVersion['uid']);
+            $this->setT3verTo(1, $table, $offVersion['uid']);
         } else {
-            $this->setT3verTo(10, $table, $id);
+            $this->setT3verTo(1, $table, $id);
         }
 
         switch ($table) {
@@ -240,7 +240,7 @@ class tx_nreasyworkspace_tcemain
             );
             foreach ($arInPage as $table => $arElements) {
                 foreach ($arElements as $arElement) {
-                    $this->setT3verTo(10, $table, $arElement['uid']);
+                    $this->setT3verTo(1, $table, $arElement['uid']);
                 }
             }
             break;

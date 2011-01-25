@@ -1,3 +1,6 @@
+2011-01-25 Alexander Opitz <alexander.opitz@netresearch.de>
+* Set page into "review" state and not "publish". (12515)
+
 2010-12-20 Alexander Opitz <alexander.opitz@netresearch.de>
 * Version 0.5.2
 
